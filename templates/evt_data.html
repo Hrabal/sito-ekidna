@@ -1,0 +1,10 @@
+	<div class='evt_data'>
+		<h2>{{ evento.name }}</h2>
+		<h4>{{ evento.date }}</h4>
+		
+		{% for band in evento.bands %}
+			{% set s = loop.index + 1 if loop.index <= 2 else 4 %}
+			<h{{ s }}>{{ band }}<br></h{{ s }}>
+		{% endfor %}
+		<br>
+	</div>

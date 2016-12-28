@@ -1,0 +1,8 @@
+<div class='eventi'>
+{% for evento in data['eventi'] %}
+<div class='evento'>
+	    {% include 'evt_img.html' %}
+	    {% include 'evt_data.html' %}
+</div>
+{% endfor %}
+</div>

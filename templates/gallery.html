@@ -1,0 +1,7 @@
+ <div class='photo_container'>
+{% for foto in data['foto'] %}
+<div class='gallery_foto'>
+	<img src='{{ url_for('static', filename='img/gallery/' + foto) }}'>
+</div>
+{% endfor %}
+</div>
