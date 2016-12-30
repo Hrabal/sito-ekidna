@@ -161,7 +161,7 @@ a.menu-link:hover {
   padding-top: 1vh;
   padding-bottom: 1vh;
 
-  overflow-y: scroll;
+  overflow-y: hidden;
   text-align: right;
   
 }
@@ -224,11 +224,23 @@ a.menu-link:hover {
   display: none;
 }
 
-#base-pics img {
-  display: inline;
+.hl_img {
   width: 100%;
+  height: 100%;
 }
 
+#base-pics img {
+  display: inline;
+  opacity: 0.85;
+  height: 100%;
+  padding-bottom: 1vh;
+
+  position: relative;
+}
+
+.hl_img + #gmap {
+  height: 100%;
+}
 
 #base-pics #gmap {
   display: inline;
@@ -246,14 +258,6 @@ a.menu-link:hover {
   width: 100%;
 }
 
-.evt_img {
-  float: left;
-}
-
-.evt_img img {
-  width: 100%;
-}
-
 .evt_data {
   padding: 0.5vmin;
   float: left;
@@ -261,6 +265,12 @@ a.menu-link:hover {
 
 
   /*  GALLERY */
+
+.gallery_focus {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
 
 .photo_container {
   width: 100%;

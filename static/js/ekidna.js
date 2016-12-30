@@ -35,8 +35,8 @@ $(document).ready(function () {
 	    return (
 	        rect.top >= 0 &&
 	        rect.left >= 0 &&
-	        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
-	        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+	        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+	        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 	    );
 	};
 
@@ -45,11 +45,10 @@ $(document).ready(function () {
 	};
 
 	function renderHlImages () {
-		var hl_imgs = $('#base-pics').children(),
-			cont_imgs = $('.cont_img');
-		cont_imgs.each(function () {
+		$('.cont_img').each(function () {
 			if (isElementInViewport(this)) {
-				$(this).appendTo($('#base-pics'))
+				$('#base-pics').append();
+				$(this).appendTo($('#base-pics')).wrap("<div class='hl_img'></div>");
 			}
 		});
 	};
@@ -58,6 +57,23 @@ $(document).ready(function () {
 	// 	renderHlImages();
 	// });
 
+	// GALLERY
+
+	function galleryFocus(img) {
+		var src = $(img).attr('src'),
+			focus_div = $('.gallery_focus');
+		$(focus_div).fadeOut(speed/2).promise().done(function() {
+			$('.gallery_focus img').attr('src', src);
+			$('.gallery_focus img').css({"width":"", "height":"", "top": "", "left" : ""});
+			$(focus_div).fadeIn(speed/2);
+			if ($('.gallery_focus img')[0].clientWidth > focus_div[0].clientWidth) {
+				var delta = $('.gallery_focus img')[0].clientWidth - focus_div[0].clientWidth;
+				console.log(delta);
+				console.log("-="+delta+ "px");
+				$('.gallery_focus img').animate({left: "-="+delta+ "px"}, speed, 'linear');
+			};
+		});
+	};
 
 	// AJAX PAGINE
 	$('.menu-link').click(function() {
@@ -73,10 +89,14 @@ $(document).ready(function () {
 			active_link.addClass('current_page');
 			$('#content').html(reply);
 			if (pag_id == 'gallery') {
-				$('#base-pics').addClass('photo_container');
+				// GALLERY
+				$('#base-pics').append('<div class="gallery_focus"><img></div>');
+				$('.gallery_img').mouseenter(function () {
+					galleryFocus(this);
+				});
 			}
 			else {
-				$('#base-pics').removeClass('photo_container');
+				$('.gallery_focus').remove();
 			} 
 			renderHlImages();
 		});
