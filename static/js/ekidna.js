@@ -62,17 +62,12 @@ $(document).ready(function () {
 	function galleryFocus(img) {
 		var src = $(img).attr('src'),
 			focus_div = $('.gallery_focus');
-		$(focus_div).fadeOut(speed/2).promise().done(function() {
-			$('.gallery_focus img').attr('src', src);
-			$('.gallery_focus img').css({"width":"", "height":"", "top": "", "left" : ""});
-			$(focus_div).fadeIn(speed/2);
-			if ($('.gallery_focus img')[0].clientWidth > focus_div[0].clientWidth) {
-				var delta = $('.gallery_focus img')[0].clientWidth - focus_div[0].clientWidth;
-				console.log(delta);
-				console.log("-="+delta+ "px");
-				$('.gallery_focus img').animate({left: "-="+delta+ "px"}, speed, 'linear');
+		$('.gallery_focus img').attr('src', src);
+		$('.gallery_focus img').css({"width":"", "height":"", "top": "", "left" : ""});
+		if ($('.gallery_focus img')[0].clientWidth > focus_div[0].clientWidth) {
+			var delta = $('.gallery_focus img')[0].clientWidth - focus_div[0].clientWidth;
+			$('.gallery_focus img').animate({left: "-="+delta+ "px"}, speed, 'linear');
 			};
-		});
 	};
 
 	// AJAX PAGINE
