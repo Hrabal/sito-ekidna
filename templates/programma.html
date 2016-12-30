@@ -1,8 +1,17 @@
 <div class='eventi'>
 {% for evento in data['eventi'] %}
 <div class='evento'>
-	    {% include 'evt_img.html' %}
-	    {% include 'evt_data.html' %}
+	<img class='cont_img' src='{{ url_for('static', filename='img/eventi/' + evento.pic) }}'>
+	<div class='evt_data'>
+		<h2>{{ evento.name }}</h2>
+		<h4>{{ evento.date }}</h4>
+		
+		{% for band in evento.bands %}
+			{% set s = loop.index + 1 if loop.index <= 2 else 4 %}
+			<h{{ s }}>{{ band }}<br></h{{ s }}>
+		{% endfor %}
+		<br>
+	</div>
 </div>
 {% endfor %}
 </div>

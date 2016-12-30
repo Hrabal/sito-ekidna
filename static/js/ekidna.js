@@ -10,29 +10,7 @@ $(document).ready(function () {
 	}, speed * 6);
 
 
-	// AJAX PAGINE
-	$('.menu-link').click(function() {
-		var data = {pagina: $(this).attr('id')},
-			url = $SCRIPT_ROOT + '/paginator',
-			active_link = $(this);
-		// $('.hamburger').trigger('click');
-		$.ajax({url:url, data:data}).done(function (reply) {
-			$('#content').html(reply);
-			$('.menu-link').removeClass('current_page');
-			active_link.addClass('current_page');
-			$('#content').html(reply);
-		});
-	});
 	// INTRO
-
-	// $('#circle_home').click(function () {
-	// 	$('#intro_content').animate({opacity: 0}, speed / 3);
-	// 	$('#circle_home').animate({width: '150%', height: '150%', opacity: 0}, speed);
-	// 	$('.overbg').animate({opacity:1}, speed*2);
-	// 	$(this).hide(speed);
-	// });
-
-	// MENU
 
 	var $hamburger = $(".hamburger");
 	$hamburger.on("click", function(e) {
@@ -44,6 +22,64 @@ $(document).ready(function () {
 		// 	$('#menu').fadeToggle(speed/2);
 		// });
 		$hamburger.toggleClass("is-active");
+	});
+
+
+	// CONTENT IMAGES
+
+	function isElementInViewport (el) {
+		if (typeof jQuery === "function" && el instanceof jQuery) {
+	        el = el[0];
+	    }
+	    var rect = el.getBoundingClientRect();
+	    return (
+	        rect.top >= 0 &&
+	        rect.left >= 0 &&
+	        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+	        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+	    );
+	};
+
+	function clearHlImages () {
+		$('#base-pics').empty();
+	};
+
+	function renderHlImages () {
+		var hl_imgs = $('#base-pics').children(),
+			cont_imgs = $('.cont_img');
+		cont_imgs.each(function () {
+			if (isElementInViewport(this)) {
+				$(this).appendTo($('#base-pics'))
+			}
+		});
+	};
+
+	$('#content').scroll(function () {
+		renderHlImages();
+	});
+
+
+	// AJAX PAGINE
+	$('.menu-link').click(function() {
+		var pag_id = $(this).attr('id'),
+			data = {pagina: pag_id},
+			url = $SCRIPT_ROOT + '/paginator',
+			active_link = $(this);
+		// $('.hamburger').trigger('click');
+		$.ajax({url:url, data:data}).done(function (reply) {
+			clearHlImages();
+			$('#content').html(reply);
+			$('.menu-link').removeClass('current_page');
+			active_link.addClass('current_page');
+			$('#content').html(reply);
+			if (pag_id == 'gallery') {
+				$('#base-pics').addClass('photo_container');
+			}
+			else {
+				$('#base-pics').removeClass('photo_container');
+			} 
+			renderHlImages();
+		});
 	});
 });
 	

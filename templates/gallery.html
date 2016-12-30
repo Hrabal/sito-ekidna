@@ -1,7 +1,9 @@
  <div class='photo_container'>
 {% for foto in data['foto'] %}
-<div class='gallery_foto'>
-	<img src='{{ url_for('static', filename='img/gallery/' + foto) }}'>
-</div>
+	{% set img_cls = 'cont_img' if loop.index % 2 == 0 else 'gallery_img' %}
+	<div class='gallery_foto'>
+			<img class="{{ img_cls }}" src='{{ url_for('static', filename='img/gallery/' + foto) }}'>
+		
+	</div>
 {% endfor %}
 </div>
