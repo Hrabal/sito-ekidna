@@ -54,9 +54,9 @@ $(document).ready(function () {
 		});
 	};
 
-	$('#content').scroll(function () {
-		renderHlImages();
-	});
+	// $('#content').scroll(function () {
+	// 	renderHlImages();
+	// });
 
 
 	// AJAX PAGINE
