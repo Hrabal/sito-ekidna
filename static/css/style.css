@@ -74,6 +74,8 @@ html, body {
   vertical-align: middle;
   word-wrap: break-word;
   opacity: 0.8;
+
+  z-index: 100;
 }
 
 .center {
@@ -166,8 +168,10 @@ a.menu-link:hover {
   line-height: 4vw;
   text-align: center;
 
-  margin-top: calc(6vh + 20vw);
   float: left;
+  -webkit-transform: translate(-50%, 0%);
+  -ms-transform: translate(-50%, 0%);
+  transform: translateY(calc(6vh + 20vw));
 }
 
 #content {
