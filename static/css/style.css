@@ -65,9 +65,9 @@ html, body {
 }
 
 #logo_cr {
-  width: 25vh;
-  height: 25vh;
-  font-size: 5vh;
+  width: 20vw;
+  height: 20vw;
+  font-size: 5vw;
   color: #333;
   text-align: center;
   background: #c70c27;
@@ -115,14 +115,6 @@ html, body {
   padding-top: 1vmin;
 }
 
-#menu {
-  font-size: 6vmin;
-  text-align: right;
-
-  float: left;
-  width: 49%;
-}
-
 a.menu-link:hover {
   opacity: 0.3;
   transition: 0.5s;
@@ -139,37 +131,52 @@ a.menu-link:hover {
 
   position: absolute;
   top: 105vh;
-  left: 50%;
-  -webkit-transform: translate(-50%, 0%);
-  -ms-transform: translate(-50%, 0%);
-  transform: translate(-50%, 0%);
-  
-  height: 69vh;
-  width: 100vmin;
+ 
+  height: 100vh;
+  width: 100%;
 }
 
 .content-present {
-  top: 31vh;
+  top: 0vh;
 }
 
 #line {
   background: #fff;
-  width: 0.5%;
+  width: 0.5vw;
   height: 100%;
 
   float: left;
-  margin: 0.5%;
+  margin: 0.5vw;
+}
+
+#base-pics {
+  width: 39vw;
+  height: 100%;
+  float: left;
+  padding-top: 1vh;
+
+  overflow-y: scroll;
+  text-align: right;
+  
+}
+
+#menu {
+  width: 19vw;
+  font-size: 3vw;
+  line-height: 4vw;
+  text-align: center;
+
+  margin-top: calc(6vh + 20vw);
+  float: left;
 }
 
 #content {
+  width: 39vw;
   font-family: 'Lato', cursive;
   font-size: 4vmin;
   line-height: 4.2vmin;
 
   float: left;
-  width: 49%;
-  height: 69vh;
-
   padding-top: 1vh;
   overflow-y: scroll;
 
