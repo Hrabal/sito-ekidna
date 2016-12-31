@@ -99,7 +99,7 @@ html, body {
 
 #logo {
   vertical-align: top;
-  width: 15vh;
+  width: 10vw;
 }
 
 
@@ -107,15 +107,26 @@ html, body {
 
 .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
   background-color: #333;
-  width: 6vmin;
+  width: 6vw;
+  height: 1vw;
 }
 
+.hamburger-inner::before {
+  top: -2vw;
+}
+
+.hamburger-inner::after {
+  bottom: -2vw;
+}
+
+
 .hamburger-box {
-  width: 6vmin;
+  width: 6vw;
+  height: 6vw;
 }
 
 .hamburger {
-  padding-top: 1vmin;
+  padding-top: 1vw;
 }
 
 a.menu-link:hover {
@@ -192,6 +203,11 @@ a.menu-link:hover {
 
 }
 
+#content p {
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+}
+
 #content a {
   text-decoration: none;
 }
@@ -227,6 +243,7 @@ a.menu-link:hover {
 .hl_img {
   width: 100%;
   height: 100%;
+  padding-bottom: 1vh;
 }
 
 #base-pics img {

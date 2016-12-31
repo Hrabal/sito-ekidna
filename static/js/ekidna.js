@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	var speed = 1000;
-	var bg_n = 0
+	var bg_n = 0;
 
 	// BACKGROUND SLIDE
 	setInterval(function(){
@@ -45,7 +45,7 @@ $(document).ready(function () {
 	};
 
 	function renderHlImages () {
-		$('.cont_img').each(function () {
+		$('#content .cont_img').each(function () {
 			if (isElementInViewport(this)) {
 				$('#base-pics').append();
 				$(this).appendTo($('#base-pics')).wrap("<div class='hl_img'></div>");
@@ -92,9 +92,14 @@ $(document).ready(function () {
 			}
 			else {
 				$('.gallery_focus').remove();
-			} 
+			}
+			if (pag_id == 'dove_siamo') {
+				$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
+			}
+			else {
+				$('map_frame').remove();
+			}
 			renderHlImages();
 		});
 	});
 });
-	
