@@ -68,7 +68,12 @@ html, body {
 #logo_cr {
   width: 20vw;
   height: 20vw;
+
+  max-width: 240px;
+  max-height: 240px;
+
   font-size: 5vw;
+
   color: #333;
   text-align: center;
   background: #c70c27;
@@ -77,6 +82,12 @@ html, body {
   opacity: 0.8;
 
   z-index: 100;
+}
+
+@media only screen and (min-width: 1200px) {
+    #logo_cr {
+        font-size: 4em;
+    }
 }
 
 .center {
@@ -100,6 +111,7 @@ html, body {
 #logo {
   vertical-align: top;
   width: 10vw;
+  max-width: 120px;
 }
 
 
@@ -109,6 +121,8 @@ html, body {
   background-color: #333;
   width: 6vw;
   height: 1vw;
+  max-width: 72px;
+  max-height: 12px;
 }
 
 .hamburger-inner::before {
@@ -119,10 +133,22 @@ html, body {
   bottom: -2vw;
 }
 
+@media only screen and (min-width: 1200px) {
+    .hamburger-inner::before {
+      top: -0.4em;
+    }
+
+    .hamburger-inner::after {
+      bottom: -0.4em;
+    }
+}
+
 
 .hamburger-box {
   width: 6vw;
+  max-width: 72px;
   height: 6vw;
+  max-height: 72px;
 }
 
 .hamburger {
@@ -232,6 +258,17 @@ a.menu-link:hover {
 
 #logo_cont {
   width: 20vmin;
+}
+
+.social_logo {
+  width: 3vw;
+  float: left;
+  margin-left: 0.5vw;
+  margin-bottom: 2vw;
+}
+
+.social_link:hover {
+  opacity: 1;
 }
 
 /*  CONTENT IMAGES */
