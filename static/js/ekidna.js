@@ -46,10 +46,8 @@ $(document).ready(function () {
 
 	function renderHlImages () {
 		$('#content .cont_img').each(function () {
-			if (isElementInViewport(this)) {
-				$('#base-pics').append();
-				$(this).appendTo($('#base-pics')).wrap("<div class='hl_img'></div>");
-			}
+			$('#base-pics').append();
+			$(this).appendTo($('#base-pics')).wrap("<div class='hl_img'></div>");
 		});
 	};
 
@@ -62,12 +60,14 @@ $(document).ready(function () {
 	function galleryFocus(img) {
 		var src = $(img).attr('src'),
 			focus_div = $('.gallery_focus');
-		$('.gallery_focus img').attr('src', src);
-		$('.gallery_focus img').css({"width":"", "height":"", "top": "", "left" : ""});
-		if ($('.gallery_focus img')[0].clientWidth > focus_div[0].clientWidth) {
-			var delta = $('.gallery_focus img')[0].clientWidth - focus_div[0].clientWidth;
-			$('.gallery_focus img').animate({left: "-="+delta+ "px"}, speed, 'linear');
+		$('.gallery_focus img').stop();
+		$('.gallery_focus img').animate({left : "0px"}, 200, function () {
+			$('.gallery_focus img').attr('src', src);
+			if ($('.gallery_focus img')[0].clientWidth > focus_div[0].clientWidth) {
+				var delta = $('.gallery_focus img')[0].clientWidth - focus_div[0].clientWidth;
+				$('.gallery_focus img').animate({left: "-="+delta+ "px"}, speed * 2, 'swing');
 			};
+		});
 	};
 
 	// AJAX PAGINE
@@ -75,12 +75,15 @@ $(document).ready(function () {
 		var pag_id = $(this).attr('id'),
 			data = {pagina: pag_id},
 			url = $SCRIPT_ROOT + '/paginator',
-			active_link = $(this);
-		$('#content').animate({marginTop: "101vh"}, speed/2, function () {
-			$('#base-pics').animate({marginTop: "101vh"}, speed/2, function () {
+			active_link = $(this),
+			v_left = (Math.floor((Math.random() * 10) + 1) / 4) + 1,
+			v_right = (Math.floor((Math.random() * 10) + 1) / 4) + 1;
+		console.log(  v_left, v_right)
+		console.log( speed / v_left, speed / v_right)
+		$('#content').animate({marginTop: "101vh"}, speed / v_left, function () {
+			$('#base-pics').animate({marginTop: "101vh"}, speed / v_right, function () {
 				$.ajax({url:url, data:data}).done(function (reply) {
 					clearHlImages();
-					$('#content').html(reply);
 					$('.menu-link').removeClass('current_page');
 					active_link.addClass('current_page');
 					$('#content').html(reply);
@@ -91,18 +94,12 @@ $(document).ready(function () {
 							galleryFocus(this);
 						});
 					}
-					else {
-						$('.gallery_focus').remove();
-					}
 					if (pag_id == 'dove_siamo') {
 						$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
 					}
-					else {
-						$('map_frame').remove();
-					}
 					renderHlImages();
-					$('#content').animate({marginTop: "0vh"}, speed/2, function () {
-						$('#base-pics').animate({marginTop: "0vh"}, speed/2);
+					$('#content').animate({marginTop: "0vh"}, speed / v_right, function () {
+						$('#base-pics').animate({marginTop: "0vh"}, speed / v_left);
 					});
 				});	
 			});

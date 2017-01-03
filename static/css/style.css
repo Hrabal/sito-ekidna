@@ -4,11 +4,6 @@
   padding: 0;
   margin: 0;
   outline: 0 none;
-
-  -webkit-transition: all 0.7s ease;
-  -moz-transition:    all 0.7s ease;
-  -ms-transition:     all 0.7s ease;
-  -o-transition:      all 0.7s ease;
 }
 
 html, body {
@@ -176,6 +171,11 @@ a.menu-link:hover {
   width: 100%;
   padding-left: 0.5vw;
   padding-right: 0.5vw;
+
+  -webkit-transition: all 0.7s ease;
+  -moz-transition:    all 0.7s ease;
+  -ms-transition:     all 0.7s ease;
+  -o-transition:      all 0.7s ease;
 }
 
 .content-present {
@@ -294,7 +294,7 @@ a.menu-link:hover {
 #base-pics img {
   display: inline;
   opacity: 0.85;
-  height: 100%;
+  width: 100%;
   padding-bottom: 1vh;
 
   position: relative;
@@ -331,8 +331,14 @@ a.menu-link:hover {
 .gallery_focus {
   width: 100%;
   height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 
   overflow: hidden;
+}
+
+#base-pics .gallery_focus img {
+  height: 100%;
+  width: auto;
 }
 
 .photo_container {
