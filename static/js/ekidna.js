@@ -17,10 +17,10 @@ $(document).ready(function () {
 		$('#logo_cr').toggleClass("center");
 		$('#logo_cr').toggleClass("cicrcle-top");
 		$('.overbg').toggleClass("overbg-on");
-		$('.content-container').toggleClass("content-present");
-		// $('#menu_bg').toggleClass('open').promise().done(function(){
-		// 	$('#menu').fadeToggle(speed/2);
-		// });
+		$('.content-container').toggleClass("content-present").promise().done(function () {
+			$('#content').toggleClass("out_vp");
+			$('#base-pics').toggleClass("out_vp");
+		});
 		$hamburger.toggleClass("is-active");
 	});
 
@@ -76,30 +76,36 @@ $(document).ready(function () {
 			data = {pagina: pag_id},
 			url = $SCRIPT_ROOT + '/paginator',
 			active_link = $(this);
-		// $('.hamburger').trigger('click');
-		$.ajax({url:url, data:data}).done(function (reply) {
-			clearHlImages();
-			$('#content').html(reply);
-			$('.menu-link').removeClass('current_page');
-			active_link.addClass('current_page');
-			$('#content').html(reply);
-			if (pag_id == 'gallery') {
-				// GALLERY
-				$('#base-pics').append('<div class="gallery_focus"><img></div>');
-				$('.gallery_img').mouseenter(function () {
-					galleryFocus(this);
-				});
-			}
-			else {
-				$('.gallery_focus').remove();
-			}
-			if (pag_id == 'dove_siamo') {
-				$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
-			}
-			else {
-				$('map_frame').remove();
-			}
-			renderHlImages();
+		$('#content').animate({marginTop: "101vh"}, speed/2, function () {
+			$('#base-pics').animate({marginTop: "101vh"}, speed/2, function () {
+				$.ajax({url:url, data:data}).done(function (reply) {
+					clearHlImages();
+					$('#content').html(reply);
+					$('.menu-link').removeClass('current_page');
+					active_link.addClass('current_page');
+					$('#content').html(reply);
+					if (pag_id == 'gallery') {
+						// GALLERY
+						$('#base-pics').append('<div class="gallery_focus"><img></div>');
+						$('.gallery_img').mouseenter(function () {
+							galleryFocus(this);
+						});
+					}
+					else {
+						$('.gallery_focus').remove();
+					}
+					if (pag_id == 'dove_siamo') {
+						$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
+					}
+					else {
+						$('map_frame').remove();
+					}
+					renderHlImages();
+					$('#content').animate({marginTop: "0vh"}, speed/2, function () {
+						$('#base-pics').animate({marginTop: "0vh"}, speed/2);
+					});
+				});	
+			});
 		});
 	});
 });

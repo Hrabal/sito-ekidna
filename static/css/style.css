@@ -203,6 +203,14 @@ a.menu-link:hover {
   
 }
 
+.out_vp {
+  margin-top: 101vh;
+}
+
+.in_vp {
+  margin-top: 0vh;
+}
+
 #menu {
   width: 19vw;
   font-size: 3vw;
