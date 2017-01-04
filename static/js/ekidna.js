@@ -44,11 +44,30 @@ $(document).ready(function () {
 		$('#base-pics').empty();
 	};
 
-	function renderHlImages () {
+	function renderHlImages (callback) {
 		$('#content .cont_img').each(function () {
-			$('#base-pics').append();
+			// $('#base-pics').append();
 			$(this).appendTo($('#base-pics')).wrap("<div class='hl_img'></div>");
 		});
+		callback();
+	};
+
+	function loopHlImages() {
+		var pics = $('#base-pics .hl_img .loop_img'),
+			pic_n = 0;
+		console.log(pics);
+		if (pics.length > 0) {
+			$('#base-pics').prepend('<div class="gallery_focus"><img></div>');
+			pics.fadeOut(1);
+			setInterval(function(){
+				$('.gallery_focus img').fadeOut(speed/2, function() {
+					pic_n += 1;
+					if (pic_n >= pics.length) {pic_n = 0};
+					$('.gallery_focus').prepend(pics[pic_n]);
+					$('.gallery_focus img').fadeIn(speed);
+				});
+			}, speed * 4);
+		};
 	};
 
 	// $('#content').scroll(function () {
@@ -90,6 +109,8 @@ $(document).ready(function () {
 					if (pag_id == 'gallery') {
 						// GALLERY
 						$('#base-pics').append('<div class="gallery_focus"><img></div>');
+						var src = $($('.gallery_img')[0]).attr('src');
+						$('.gallery_focus img').attr('src', src);
 						$('.gallery_img').mouseenter(function () {
 							galleryFocus(this);
 						});
@@ -97,7 +118,7 @@ $(document).ready(function () {
 					if (pag_id == 'dove_siamo') {
 						$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
 					}
-					renderHlImages();
+					renderHlImages(loopHlImages);
 					$('#content').animate({marginTop: "0vh"}, speed / v_right, function () {
 						$('#base-pics').animate({marginTop: "0vh"}, speed / v_left);
 					});
