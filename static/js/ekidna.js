@@ -1,6 +1,7 @@
 $(document).ready(function () {
-	var speed = 1000;
-	var bg_n = 0;
+	var speed = 1000,
+		bg_n = 0,
+		hl_img_loop_id = 0;
 
 	// BACKGROUND SLIDE
 	setInterval(function(){
@@ -40,26 +41,27 @@ $(document).ready(function () {
 	    );
 	};
 
-	function clearHlImages () {
+	function clearHlImages (loop_id) {
 		$('#base-pics').empty();
+		clearInterval(loop_id);
 	};
 
-	function renderHlImages (callback) {
+	function renderHlContent (callback) {
+		console.log($('#content .cont_img'));
 		$('#content .cont_img').each(function () {
-			// $('#base-pics').append();
 			$(this).appendTo($('#base-pics')).wrap("<div class='hl_img'></div>");
 		});
-		callback();
+		var loop_id = callback();
+		return loop_id
 	};
 
 	function loopHlImages() {
 		var pics = $('#base-pics .hl_img .loop_img'),
 			pic_n = 0;
-		console.log(pics);
 		if (pics.length > 0) {
 			$('#base-pics').prepend('<div class="gallery_focus"><img></div>');
 			pics.fadeOut(1);
-			setInterval(function(){
+			var loop_id = setInterval(function(){
 				$('.gallery_focus img').fadeOut(speed/2, function() {
 					pic_n += 1;
 					if (pic_n >= pics.length) {pic_n = 0};
@@ -68,6 +70,7 @@ $(document).ready(function () {
 				});
 			}, speed * 4);
 		};
+		return loop_id
 	};
 
 	// $('#content').scroll(function () {
@@ -97,12 +100,10 @@ $(document).ready(function () {
 			active_link = $(this),
 			v_left = (Math.floor((Math.random() * 10) + 1) / 4) + 1,
 			v_right = (Math.floor((Math.random() * 10) + 1) / 4) + 1;
-		console.log(  v_left, v_right)
-		console.log( speed / v_left, speed / v_right)
 		$('#content').animate({marginTop: "101vh"}, speed / v_left, function () {
 			$('#base-pics').animate({marginTop: "101vh"}, speed / v_right, function () {
 				$.ajax({url:url, data:data}).done(function (reply) {
-					clearHlImages();
+					clearHlImages(hl_img_loop_id);
 					$('.menu-link').removeClass('current_page');
 					active_link.addClass('current_page');
 					$('#content').html(reply);
@@ -118,7 +119,7 @@ $(document).ready(function () {
 					if (pag_id == 'dove_siamo') {
 						$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
 					}
-					renderHlImages(loopHlImages);
+					hl_img_loop_id = renderHlContent(loopHlImages);
 					$('#content').animate({marginTop: "0vh"}, speed / v_right, function () {
 						$('#base-pics').animate({marginTop: "0vh"}, speed / v_left);
 					});

@@ -79,12 +79,6 @@ html, body {
   z-index: 100;
 }
 
-@media only screen and (min-width: 1200px) {
-    #logo_cr {
-        font-size: 4em;
-    }
-}
-
 .center {
   position: absolute;
   left: 50%;
@@ -223,6 +217,16 @@ a.menu-link:hover {
   transform: translateY(calc(6vh + 20vw));
 }
 
+@media only screen and (min-width: 1200px) {
+    #logo_cr {
+        font-size: 4em;
+    }
+    #menu {
+      font-size: 2.5em;
+      line-height: 1em;
+    }
+}
+
 #content {
   width: 38.5vw;
   height: 99.5vh;
@@ -259,6 +263,43 @@ a.menu-link:hover {
 #content a:hover {
   color: #c70c27;
   opacity: 0.9;
+}
+
+blockquote {
+  background: #c70c27;
+  opacity: 0.8;
+  border-left: 10px solid #fff;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+  font-size: initial;
+  line-height: initial;
+}
+
+blockquote:before {
+  color: #fff;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+#content blockquote a:link {
+ color: #333;
+}
+
+#content blockquote a:hover {
+  color: #666;
+  opacity: 0.9;
+}
+
+#content blockquote a:visited {
+ color: #999;
 }
 
 /*  HOME  */
@@ -312,8 +353,26 @@ a.menu-link:hover {
 
   /* EVENTI */
 
+#top-eventi {
+  position: fixed;
+  top: 1vh;
+  background-color: #333;
+  opacity: 0.99;
+  width: 37vw;
+  height: 25vh;
+  border-bottom: 0.5vh #fff solid;
+  padding: 0.5vw;
+
+  overflow-y: scroll;
+}
+
+.month {
+  padding-top: 1vh;
+}
+
 .eventi {
   width: 100%;
+    padding-top: 28vh;
 }
 
 .evento {

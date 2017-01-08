@@ -1,17 +1,40 @@
+<div id='top-eventi'>
+	<h2>Prossime serate ed eventi in Ekidna:</h2>
+	<div id='date-eventi-container'>
+		{% set cur_month = None %}
+		{% for evento in data['eventi'] %}
+			{% if evento.month != cur_month %}
+				{% set cur_month = evento.month %}
+				<div class="month"><h3>{{ evento.month }}</h3></div>
+			{% endif %}
+			<div class="evt-date">
+				<a href="#{{ evento.date.strftime('%d-%m-%Y') }}">{{ evento.date.strftime('%d/%m/%Y') }} - {{ evento.name }}</a>
+			</div>
+		{% endfor %}
+	</div>
+</div>
 <div class='eventi'>
 {% for evento in data['eventi'] %}
-<div class='evento'>
-	<img class='cont_img' src='{{ url_for('static', filename='img/eventi/' + evento.pic) }}'>
+<div class='evento' id="{{ evento.date.strftime('%d-%m-%Y') }}">
 	<div class='evt_data'>
 		<h2>{{ evento.name }}</h2>
-		<h4>{{ evento.date }}</h4>
+		<h4>{{ evento.date.strftime('%d-%m-%Y') }}</h4>
 		
+		<img src='{{ url_for('static', filename='img/eventi/' + evento.pic) }}'>
 		{% for band in evento.bands %}
 			{% set s = loop.index + 1 if loop.index <= 2 else 4 %}
 			<h{{ s }}>{{ band }}<br></h{{ s }}>
 		{% endfor %}
 		<br>
+		A partire dalle {{ evento.date.strftime('%H:%M') }}
+		<br>
+		{{ evento.text }}
 	</div>
 </div>
+{% endfor %}
+</div>
+<div id="past-events">
+{% for evento in data['eventi_passati'] %}
+	<img class='cont_img loop_img' src='{{ url_for('static', filename='img/eventi/' + evento.pic) }}'>
 {% endfor %}
 </div>
