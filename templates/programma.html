@@ -35,6 +35,6 @@
 </div>
 <div id="past-events">
 {% for evento in data['eventi_passati'] %}
-	<img class='cont_img loop_img' src='{{ url_for('static', filename='img/eventi/' + evento.pic) }}'>
+	<img class='cont_img loop_img evt_img' src='{{ url_for('static', filename='img/eventi/' + evento.pic) }}'>
 {% endfor %}
 </div>

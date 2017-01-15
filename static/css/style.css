@@ -217,6 +217,21 @@ a.menu-link:hover {
   transform: translateY(calc(6vh + 20vw));
 }
 
+.content {
+  width: 38.5vw;
+  height: 99.5vh;
+  font-family: 'Lato', cursive;
+  font-size: 1.5vw;
+  line-height: 2vw;
+
+  float: left;
+  max-width: 500px;
+  padding-top: 1vh;
+  overflow-y: scroll;
+  z-index: 100;
+
+}
+
 @media only screen and (min-width: 1200px) {
     #logo_cr {
         font-size: 4em;
@@ -225,42 +240,32 @@ a.menu-link:hover {
       font-size: 2.5em;
       line-height: 1em;
     }
+    .content {
+      font-size: 1.059em;
+      line-height: 1.408em;
+    }
 }
 
-#content {
-  width: 38.5vw;
-  height: 99.5vh;
-  font-family: 'Lato', cursive;
-  font-size: 1.5vw;
-  line-height: 2vw;
-
-  float: left;
-  padding-top: 1vh;
-  overflow-y: scroll;
-  z-index: 100;
-
-}
-
-#content p {
+.content p {
   padding-top: 2vh;
   padding-bottom: 2vh;
 }
 
-#content a {
+.content a {
   text-decoration: none;
 }
 
-#content a:link {
+.content a:link {
   color: #c70c27;
   opacity: 0.5;
 }
 
-#content a:visited {
+.content a:visited {
   color: #c70c27;
   opacity: 0.3;
 }
 
-#content a:hover {
+.content a:hover {
   color: #c70c27;
   opacity: 0.9;
 }
@@ -289,24 +294,21 @@ blockquote p {
   display: inline;
 }
 
-#content blockquote a:link {
+.content blockquote a:link {
  color: #333;
 }
 
-#content blockquote a:hover {
+.content blockquote a:hover {
   color: #666;
   opacity: 0.9;
 }
 
-#content blockquote a:visited {
+.content blockquote a:visited {
  color: #999;
 }
 
-/*  HOME  */
-
-
-#logo_cont {
-  width: 20vmin;
+.content img {
+  width: 100%;
 }
 
 .social_logo {
@@ -314,6 +316,13 @@ blockquote p {
   float: left;
   margin-left: 0.5vw;
   margin-bottom: 2vw;
+}
+
+/*  HOME  */
+
+
+#logo_cont {
+  width: 20vmin;
 }
 
 .social_link:hover {
@@ -354,12 +363,10 @@ blockquote p {
   /* EVENTI */
 
 #top-eventi {
-  position: fixed;
   top: 1vh;
   background-color: #333;
   opacity: 0.99;
-  width: 37vw;
-  height: 25vh;
+  max-height: 25vh;
   border-bottom: 0.5vh #fff solid;
   padding: 0.5vw;
 
@@ -372,7 +379,7 @@ blockquote p {
 
 .eventi {
   width: 100%;
-    padding-top: 28vh;
+  padding-top: 1vh;
 }
 
 .evento {
@@ -384,7 +391,6 @@ blockquote p {
   float: left;
 }
 
-
   /*  GALLERY */
 
 .gallery_focus {
@@ -392,6 +398,7 @@ blockquote p {
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
 
+  float: right;
   overflow: hidden;
 }
 

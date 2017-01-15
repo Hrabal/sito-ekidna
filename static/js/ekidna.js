@@ -1,7 +1,8 @@
 $(document).ready(function () {
 	var speed = 1000,
 		bg_n = 0,
-		hl_img_loop_id = 0;
+		hl_img_loop_id = 0,
+		isPaused = {};
 
 	// BACKGROUND SLIDE
 	setInterval(function(){
@@ -19,7 +20,7 @@ $(document).ready(function () {
 		$('#logo_cr').toggleClass("cicrcle-top");
 		$('.overbg').toggleClass("overbg-on");
 		$('.content-container').toggleClass("content-present").promise().done(function () {
-			$('#content').toggleClass("out_vp");
+			$('.content').toggleClass("out_vp");
 			$('#base-pics').toggleClass("out_vp");
 		});
 		$hamburger.toggleClass("is-active");
@@ -47,8 +48,7 @@ $(document).ready(function () {
 	};
 
 	function renderHlContent (callback) {
-		console.log($('#content .cont_img'));
-		$('#content .cont_img').each(function () {
+		$('.content .cont_img').each(function () {
 			$(this).appendTo($('#base-pics')).wrap("<div class='hl_img'></div>");
 		});
 		var loop_id = callback();
@@ -61,34 +61,47 @@ $(document).ready(function () {
 		if (pics.length > 0) {
 			$('#base-pics').prepend('<div class="gallery_focus"><img></div>');
 			pics.fadeOut(1);
-			var loop_id = setInterval(function(){
+			var loop_id = setInterval(function() {
 				$('.gallery_focus img').fadeOut(speed/2, function() {
-					pic_n += 1;
-					if (pic_n >= pics.length) {pic_n = 0};
-					$('.gallery_focus').prepend(pics[pic_n]);
-					$('.gallery_focus img').fadeIn(speed);
+					if (!loop_id.pause) {
+						pic_n += 1;
+						if (pic_n >= pics.length) {pic_n = 0};
+						$(pics[pic_n]).css({left : "0px"})
+						$('.gallery_focus').prepend(pics[pic_n]);
+						$('.gallery_focus img').fadeIn(speed);
+					}
 				});
-			}, speed * 4);
+			}, speed * 3);
+			slide_img(loop_id);
 		};
 		return loop_id
 	};
 
-	// $('#content').scroll(function () {
+	function slide_img(loop_id) {
+		var focus_div = $('.gallery_focus')[0],
+			img = $('.gallery_focus img')[0];
+		$(img).css({left : "0px"})
+		loop_id.pause = true;
+		if (img.clientWidth > focus_div.clientWidth) {
+			var delta = img.clientWidth - focus_div.clientWidth;
+			$(img).animate({left: "-="+delta+ "px"}, speed * 2, 'swing', function () {
+				isPaused.pause = false;
+			});
+		}
+	}
+
+	// $('.content').scroll(function () {
 	// 	renderHlImages();
 	// });
 
 	// GALLERY
 
 	function galleryFocus(img) {
-		var src = $(img).attr('src'),
-			focus_div = $('.gallery_focus');
+		var src = $(img).attr('src');
 		$('.gallery_focus img').stop();
 		$('.gallery_focus img').animate({left : "0px"}, 200, function () {
 			$('.gallery_focus img').attr('src', src);
-			if ($('.gallery_focus img')[0].clientWidth > focus_div[0].clientWidth) {
-				var delta = $('.gallery_focus img')[0].clientWidth - focus_div[0].clientWidth;
-				$('.gallery_focus img').animate({left: "-="+delta+ "px"}, speed * 2, 'swing');
-			};
+			slide_img();
 		});
 	};
 
@@ -100,13 +113,13 @@ $(document).ready(function () {
 			active_link = $(this),
 			v_left = (Math.floor((Math.random() * 10) + 1) / 4) + 1,
 			v_right = (Math.floor((Math.random() * 10) + 1) / 4) + 1;
-		$('#content').animate({marginTop: "101vh"}, speed / v_left, function () {
+		$('.content').animate({marginTop: "101vh"}, speed / v_left, function () {
 			$('#base-pics').animate({marginTop: "101vh"}, speed / v_right, function () {
 				$.ajax({url:url, data:data}).done(function (reply) {
 					clearHlImages(hl_img_loop_id);
 					$('.menu-link').removeClass('current_page');
 					active_link.addClass('current_page');
-					$('#content').html(reply);
+					$('.content').html(reply);
 					if (pag_id == 'gallery') {
 						// GALLERY
 						$('#base-pics').append('<div class="gallery_focus"><img></div>');
@@ -120,7 +133,7 @@ $(document).ready(function () {
 						$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
 					}
 					hl_img_loop_id = renderHlContent(loopHlImages);
-					$('#content').animate({marginTop: "0vh"}, speed / v_right, function () {
+					$('.content').animate({marginTop: "0vh"}, speed / v_right, function () {
 						$('#base-pics').animate({marginTop: "0vh"}, speed / v_left);
 					});
 				});	
