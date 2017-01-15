@@ -311,15 +311,14 @@ blockquote p {
   width: 100%;
 }
 
+/*  HOME  */
+
 .social_logo {
   width: 3vw;
   float: left;
   margin-left: 0.5vw;
   margin-bottom: 2vw;
 }
-
-/*  HOME  */
-
 
 #logo_cont {
   width: 20vmin;
