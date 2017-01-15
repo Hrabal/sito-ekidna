@@ -8,14 +8,19 @@
 				<div class="month"><h3>{{ evento.month }}</h3></div>
 			{% endif %}
 			<div class="evt-date">
-				<a href="#{{ evento.date.strftime('%d-%m-%Y') }}">{{ evento.date.strftime('%d/%m/%Y') }} - {{ evento.name }}</a>
+				<a evt="#{{ evento.date.strftime('%d-%m-%Y') }}" class="evt_selector">{{ evento.date.strftime('%d/%m/%Y') }} - {{ evento.name }}</a><br>
+				<div class='bands'>|
+					{% for band in evento.bands %}
+						{{ band }} |
+					{% endfor %}
+				</div>
 			</div>
 		{% endfor %}
 	</div>
 </div>
 <div class='eventi'>
 {% for evento in data['eventi'] %}
-<div class='evento' id="{{ evento.date.strftime('%d-%m-%Y') }}">
+<div class='evento hide' id="{{ evento.date.strftime('%d-%m-%Y') }}">
 	<div class='evt_data'>
 		<h2>{{ evento.name }}</h2>
 		<h4>{{ evento.date.strftime('%d-%m-%Y') }}</h4>

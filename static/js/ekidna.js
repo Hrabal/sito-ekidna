@@ -90,6 +90,12 @@ $(document).ready(function () {
 		}
 	}
 
+	// EVENTI
+
+	function show_evt (id) {
+
+	}
+
 	// $('.content').scroll(function () {
 	// 	renderHlImages();
 	// });
@@ -97,11 +103,12 @@ $(document).ready(function () {
 	// GALLERY
 
 	function galleryFocus(img) {
-		var src = $(img).attr('src');
+		var src = $(img).attr('src'),
+			loop_id = 0;
 		$('.gallery_focus img').stop();
 		$('.gallery_focus img').animate({left : "0px"}, 200, function () {
 			$('.gallery_focus img').attr('src', src);
-			slide_img();
+			slide_img(loop_id);
 		});
 	};
 
@@ -131,6 +138,13 @@ $(document).ready(function () {
 					}
 					if (pag_id == 'dove_siamo') {
 						$('#base-pics').append('<iframe id="map_frame" class="hl_img" src="static/map.html"><img></iframe>');
+					}
+					if (pag_id == 'programma') {
+						$('.eventi').css({"padding-top": $('#top-eventi')[0].clientHeight + 10});
+						$('.evt_selector').click(function(){
+							$('.evento').addClass('hide');
+							$($(this).attr('evt')).removeClass('hide', 1000, "easeInBack");
+						});
 					}
 					hl_img_loop_id = renderHlContent(loopHlImages);
 					$('.content').animate({marginTop: "0vh"}, speed / v_right, function () {

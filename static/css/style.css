@@ -362,6 +362,18 @@ blockquote p {
 
   /* EVENTI */
 
+.hide {
+  display: none;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+.bands {
+  padding-left: 2vh;
+  font-size: 0.8em;
+}    
 #top-eventi {
   top: 1vh;
   background-color: #333;
@@ -369,7 +381,9 @@ blockquote p {
   max-height: 25vh;
   border-bottom: 0.5vh #fff solid;
   padding: 0.5vw;
-
+  position: absolute;
+  width: 100%;
+  max-width: 485px;
   overflow-y: scroll;
 }
 
@@ -384,11 +398,35 @@ blockquote p {
 
 .evento {
   width: 100%;
+
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .evt_data {
   padding: 0.5vmin;
   float: left;
+}
+
+.evt-date a {
+  text-decoration: none;
+}
+
+.evt-date a:link {
+  color: #eee;
+  opacity: 0.5;
+}
+
+.evt-date a:visited {
+  color: #ddd;
+  opacity: 0.3;
+}
+
+.evt-date a:hover {
+  color: #ccc;
+  opacity: 0.9;
 }
 
   /*  GALLERY */
