@@ -27,12 +27,10 @@
 		
 		<img src='{{ url_for('static', filename='img/eventi/' + evento.pic) }}' class='cont_img-no_move'>
 		{% for band in evento.bands %}
-			{% set s = loop.index + 1 if loop.index <= 2 else 4 %}
-			<h{{ s }}>{{ band }}<br></h{{ s }}>
+{% set s = loop.index if loop.index <= 3 else 4 %}
+<h{{ s }}>{{ band }}</h{{ s }}>
 		{% endfor %}
-		<br>
 		A partire dalle {{ evento.date.strftime('%H:%M') }}
-		<br>
 		{{ evento.text }}
 	</div>
 </div>

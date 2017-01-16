@@ -407,6 +407,7 @@ blockquote p {
 .evt_data {
   padding: 0.5vmin;
   float: left;
+  white-space: pre-line;
 }
 
 .evt-date a {
