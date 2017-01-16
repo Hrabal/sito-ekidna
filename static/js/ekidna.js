@@ -71,7 +71,7 @@ $(document).ready(function () {
 						$('.gallery_focus img').fadeIn(speed);
 					}
 				});
-			}, speed * 3);
+			}, speed * 8);
 			slide_img(loop_id);
 		};
 		return loop_id
